@@ -5,27 +5,30 @@ using System.Runtime.CompilerServices;
 public partial class Ball : CharacterBody2D
 {
     [Export]
-    public int Speed = 500;
+    public int Speed = 600;
     private Vector2 direction;
     public override void _Ready()
     {
-        direction = Vector2.Zero;
+        //direction = Vector2.Zero;
         StartMoving();
     }
 
     public void StartMoving()
     {
-        float startAngleDegrees = (float)GD.RandRange(15.0, 165.0);
+        float startAngleDegrees = (float)GD.RandRange(260.0, 340.0);
+        float angleRadians = Mathf.DegToRad(startAngleDegrees);
         direction = new Vector2(
-            (float)Math.Cos(startAngleDegrees * Math.PI / 180),
-            (float)Math.Sin(startAngleDegrees * Math.PI / 180)
+            (float)Math.Cos(angleRadians),
+            (float)Math.Sin(angleRadians)
         );
+        if (GD.Randf() > 0.5f) direction.X *= -1;
+
+        Velocity = direction * Speed;
     }
     public override void _PhysicsProcess(double delta)
     {
         // Called every frame. 'delta' is the elapsed time since the previous frame.
-        Vector2 velocity = Velocity * Speed;
-        KinematicCollision2D collision = MoveAndCollide(velocity * (float)delta);
+        KinematicCollision2D collision = MoveAndCollide(Velocity * (float)delta);
 
         if (collision == null)
         {
@@ -44,7 +47,8 @@ public partial class Ball : CharacterBody2D
             }
             else if (colliderName == "Player")
             {
-                HandlePlayerCollision(collider);
+                HandlePlayerCollision(collision, collider);
+                GD.Print($"Ball collided with: {collider.Name}");
             }
             else
             {
@@ -53,17 +57,36 @@ public partial class Ball : CharacterBody2D
         }
     }
 
-    private void HandlePlayerCollision(Node Player)
+    private void HandlePlayerCollision(KinematicCollision2D collision, Node Player)
     {
         var playerBody = Player as StaticBody2D;
         if (playerBody == null) return;
 
-        var shape = playerBody.GetNode<CollisionShape2D>("CollisionShape2D");
+        var shape = playerBody.GetNode<CollisionShape2D>("CollisionShape2D").Shape as RectangleShape2D;
+
         if (shape == null) return;
 
+        float playerX = playerBody.GlobalPosition.X;
+        float ballX = GlobalPosition.X;
 
-        GD.Print($"Ball collided with Player: {playerBody.Name}");
-        // Implement additional logic for player collision
+        float halfWidth = shape.Size.X / 2f;
+        float hitPosition = (ballX - playerX) / halfWidth;
+        hitPosition = Mathf.Clamp(hitPosition, -1f, 1f);
+
+        float maxAngle = Mathf.DegToRad(75);
+        float bounceAngle = hitPosition * maxAngle;
+
+        Vector2 normal = collision.GetNormal();
+
+        Vector2 newDirection = new Vector2(Mathf.Sin(bounceAngle), -Mathf.Cos(bounceAngle)).Normalized();
+
+        // 🔒 GUARANTEE separation
+        if (newDirection.Dot(normal) >= 0)
+        {
+            newDirection = newDirection.Bounce(normal);
+        }
+
+        Velocity = newDirection.Normalized() * Speed;
     }
     private void HandleBallOutOfBounds(Node BottomBoundary)
     {

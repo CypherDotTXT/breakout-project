@@ -30,7 +30,6 @@ scale = Vector2(0.846185, 1.03708)
 position = Vector2(0, 350)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Left Boundary"]
-position = Vector2(0, 350)
 scale = Vector2(0.972112, 1.00142)
 shape = SubResource("RectangleShape2D_rxg2q")
 

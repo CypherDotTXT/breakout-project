@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://rbi4ab7y3o2d"]
+[gd_scene load_steps=5 format=3 uid="uid://rbi4ab7y3o2d"]
 
+[ext_resource type="Script" uid="uid://ptkl8ke4s64y" path="res://Scripts/Player.cs" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://bd7o21x5j3x47" path="res://Sprites/sprites.png" id="1_v0iea"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cvnsp"]
@@ -11,6 +12,7 @@ radius = 5.0
 height = 100.0
 
 [node name="Player" type="StaticBody2D"]
+script = ExtResource("1_cvnsp")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_cvnsp")
