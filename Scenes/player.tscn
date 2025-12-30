@@ -3,21 +3,21 @@
 [ext_resource type="Script" uid="uid://ptkl8ke4s64y" path="res://Scripts/Player.cs" id="1_cvnsp"]
 [ext_resource type="Texture2D" uid="uid://bd7o21x5j3x47" path="res://Sprites/sprites.png" id="1_v0iea"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cvnsp"]
+size = Vector2(11, 99.5328)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_cvnsp"]
 atlas = ExtResource("1_v0iea")
 region = Rect2(99.8889, 49.5764, 150.111, 50.3151)
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_6t5aa"]
-radius = 5.0
-height = 100.0
-
 [node name="Player" type="StaticBody2D"]
 script = ExtResource("1_cvnsp")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("AtlasTexture_cvnsp")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2.5928e-06, 0.5)
 rotation = 1.5708
 scale = Vector2(1, 1.08507)
-shape = SubResource("CapsuleShape2D_6t5aa")
+shape = SubResource("RectangleShape2D_cvnsp")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_cvnsp")

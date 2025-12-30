@@ -24,8 +24,8 @@ public partial class Player : StaticBody2D
             velocity.X += 1;
         Position += velocity * speed * (float)delta;
         Position = new Vector2(
-            Mathf.Clamp(Position.X, 25, Screensize.X - 25),
-            Mathf.Clamp(Position.Y, 25, Screensize.Y - 25)
+            Mathf.Clamp(Position.X, 50, Screensize.X - 50),
+            Mathf.Clamp(Position.Y, 50, Screensize.Y - 50)
         );
     }
 }
