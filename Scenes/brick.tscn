@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://5ub08h4chuhr"]
+[gd_scene load_steps=5 format=3 uid="uid://5ub08h4chuhr"]
 
+[ext_resource type="Script" uid="uid://ds532ljhnj5ru" path="res://Scripts/Brick.cs" id="1_hqb1c"]
 [ext_resource type="Texture2D" uid="uid://bqlhyb13n1tjm" path="res://Sprites/Box.png" id="1_lvh1d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pn5wc"]
@@ -9,6 +10,7 @@ size = Vector2(80, 40)
 atlas = ExtResource("1_lvh1d")
 
 [node name="Brick" type="StaticBody2D"]
+script = ExtResource("1_hqb1c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_pn5wc")
