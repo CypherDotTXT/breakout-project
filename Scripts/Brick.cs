@@ -6,7 +6,7 @@ public partial class Brick : StaticBody2D
     [Export]
     public int HitPoints = 1;
     [Signal]
-    public delegate void BrickDestroyedEventHandler(Brick brick);
+    public delegate void BrickDestroyedEventHandler();
 
     public override void _Ready()
     {
@@ -17,7 +17,7 @@ public partial class Brick : StaticBody2D
         HitPoints--;
         if (HitPoints <= 0)
         {
-            EmitSignal(SignalName.BrickDestroyed, this);
+            EmitSignal(SignalName.BrickDestroyed);
             QueueFree();
         }
     }
