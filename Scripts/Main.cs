@@ -5,6 +5,7 @@ using System.Xml.Resolvers;
 public partial class Main : Node2D
 {
     private Ball ball;
+    private Hud hud;
     private StaticBody2D player;
     private int score = 0;
     private int lives = 3;
@@ -14,6 +15,11 @@ public partial class Main : Node2D
         ball = GetNode<Ball>("Ball");
         player = GetNode<StaticBody2D>("Player");
         ball.OnBallLoss += OnBallLoss;
+        ball.BrickHit += OnBrickHit;
+
+        hud = GetNode<Hud>("HUD");
+        hud.SetLives(lives);
+        hud.SetScore(score);
     }
 
     public override void _PhysicsProcess(double delta)
@@ -35,9 +41,16 @@ public partial class Main : Node2D
         }
     }
 
+    private void OnBrickHit()
+    {
+        score += 100;
+        hud.SetScore(score);
+    }
+
     private void OnBallLoss()
     {
         lives--;
+        hud.SetLives(lives);
         if (lives <= 0)
         {
             GD.Print("Game Over");

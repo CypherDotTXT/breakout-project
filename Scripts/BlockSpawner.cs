@@ -6,12 +6,12 @@ public partial class BlockSpawner : Node2D
     [Export]
     public PackedScene BrickScene;
     [Export]
-    public int Rows = 7;
+    public int Rows = 8;
     [Export]
-    public int Columns = 9;
+    public int Columns = 12;
 
     [Export]
-    public Vector2 BrickSize = new Vector2(75, 36);
+    public Vector2 BrickSize = new Vector2(50, 24);
 
     public override void _Ready()
     {

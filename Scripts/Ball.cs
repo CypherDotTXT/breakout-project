@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 public partial class Ball : CharacterBody2D
 {
     [Export]
-    public int Speed = 600;
+    public int Speed = 400;
     private Vector2 direction;
     public BallState State { get; private set; } = BallState.AttachedToPlayer;
     [Signal]
@@ -46,9 +46,10 @@ public partial class Ball : CharacterBody2D
                 AttachToPlayer();
                 EmitSignal(SignalName.OnBallLoss);
             }
-            else if (colliderName == "Brick")
+            else if (collision.GetCollider() is Brick brick)
             {
                 Velocity = Velocity.Bounce(collision.GetNormal());
+                brick.Hit();
                 EmitSignal(SignalName.BrickHit);
             }
         }

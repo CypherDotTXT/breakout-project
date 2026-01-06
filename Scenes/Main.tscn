@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://d5shg4e2amsn"]
+[gd_scene load_steps=11 format=3 uid="uid://d5shg4e2amsn"]
 
 [ext_resource type="PackedScene" uid="uid://rbi4ab7y3o2d" path="res://Scenes/player.tscn" id="1_idj7w"]
 [ext_resource type="Script" uid="uid://c5soetox7p31u" path="res://Scripts/Main.cs" id="1_kln2b"]
 [ext_resource type="PackedScene" uid="uid://i7mkelx5507v" path="res://Scenes/ball.tscn" id="2_kln2b"]
 [ext_resource type="Script" uid="uid://df271nt84jkin" path="res://Scripts/BlockSpawner.cs" id="4_pbw6q"]
 [ext_resource type="PackedScene" uid="uid://5ub08h4chuhr" path="res://Scenes/brick.tscn" id="5_v1gob"]
+[ext_resource type="PackedScene" uid="uid://cc010dqpbnn6l" path="res://Scenes/hud.tscn" id="6_v1gob"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rxg2q"]
 size = Vector2(1, 700)
@@ -65,6 +66,8 @@ position = Vector2(350, 618)
 position = Vector2(350, 593)
 
 [node name="BlockSpawner" type="Node2D" parent="."]
-position = Vector2(49, 40)
+position = Vector2(76, 70)
 script = ExtResource("4_pbw6q")
 BrickScene = ExtResource("5_v1gob")
+
+[node name="HUD" parent="." instance=ExtResource("6_v1gob")]

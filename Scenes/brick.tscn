@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://bqlhyb13n1tjm" path="res://Sprites/Box.png" id="1_lvh1d"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pn5wc"]
-size = Vector2(75, 36)
+size = Vector2(50, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hqb1c"]
 atlas = ExtResource("1_lvh1d")
@@ -16,6 +16,6 @@ script = ExtResource("1_hqb1c")
 shape = SubResource("RectangleShape2D_pn5wc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1.43051e-06, -4.76837e-07)
-scale = Vector2(0.95, 0.9)
+position = Vector2(-2.38419e-07, 0)
+scale = Vector2(0.625, 0.625)
 texture = SubResource("AtlasTexture_hqb1c")
